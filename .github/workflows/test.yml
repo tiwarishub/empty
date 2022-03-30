@@ -1,0 +1,19 @@
+name: Cache Local
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/cache@v3
+      id: cache
+      with:
+        path: /tmp/datacache
+        key: cache_50_1
+    - if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        rm -rf /tmp/datacache
+        mkdir -p /tmp/datacache
+        for y in {0..2};do openssl rand -out /tmp/datacache/data$y  -base64 $(( 50 * 2**20 * 3/4 )); done 
+        du -sh /tmp/datacache
