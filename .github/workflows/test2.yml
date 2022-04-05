@@ -10,7 +10,7 @@ jobs:
       id: cache
       with:
         path: /tmp/datacache
-        key: cache_50_2
+        key: cache_50_3
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
