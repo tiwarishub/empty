@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@v3
+    - uses: actions/cache@f63a711791a8e7cc2d5463afc081136e00085800
       id: cache
       with:
         path: /tmp/datacache
