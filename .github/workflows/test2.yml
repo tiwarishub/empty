@@ -1,19 +1,45 @@
-name: Cache Local
+name: runner-cache
+
 on:
   workflow_dispatch:
-
+  push:
+    branches:
+    - main
 jobs:
-  build:
+  upload:
     runs-on: ubuntu-latest
+    name: runner-cache upload )
     steps:
-    - uses: actions/cache@f63a711791a8e7cc2d5463afc081136e00085800
+    - uses: actions/checkout@v3
+    - name: Create file to cache
+      run: |
+        mkdir test-cache
+        echo "foo" > test-cache/test.txt
+    - uses: actions/cache@v3
+      with:
+        path: test-cache
+        key: ${{ runner.os }}-runner-${{ github.sha }}
+
+  restore:
+    needs: upload
+    runs-on: ubuntu-latest
+    name: runner-cache restore
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
       id: cache
       with:
-        path: /tmp/datacache
-        key: cache_50_3
-    - if: steps.cache.outputs.cache-hit != 'true'
+        path: test-cache
+        key: ${{ runner.os }}-runner-${{ github.sha }}
+
+    - name: Fail if cache not found
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        rm -rf /tmp/datacache
-        mkdir -p /tmp/datacache
-        for y in {0..100};do openssl rand -out /tmp/datacache/data$y  -base64 $(( 100 * 2**20 * 3/4 )); done 
-        du -sh /tmp/datacache
+        echo "Cache not found, upload failed"
+        exit 1
+    - name: Output cache content
+      run: |
+        cat test-cache/test.txt
+    - name: Check cache contents
+      shell: bash
+      run: if [ $(cat test-cache/test.txt) == "foo" ]; then echo "Cache contents verified."; exit 0; else echo "Cache invalid"; exit 1; fi
