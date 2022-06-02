@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@v3
+    - uses: actions/cache@v2
       id: cache
       with:
         path: /tmp/datacache
-        key: cache_50_1
+        key: cache_50_2
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
