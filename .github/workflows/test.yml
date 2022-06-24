@@ -5,11 +5,11 @@ jobs:
   java-example:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@c75dca6de7343aa0af5fc399a9656c0a37dc162b
+    - uses: actions/cache@7c59aeb02d3ccdcf05a6f8e6f431b8a9f0ee0688
       id: cache
       with:
         path: /tmp/datacache
-        key: showDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTileshowDashboardAzureResourceTile
+        key: check123
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
