@@ -9,7 +9,7 @@ jobs:
       id: cache
       with:
         path: /tmp/datacache
-        key: check123
+        key: check1232
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
