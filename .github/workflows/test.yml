@@ -5,11 +5,11 @@ jobs:
   java-example:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@7c59aeb02d3ccdcf05a6f8e6f431b8a9f0ee0688
+    - uses: actions/cache@20817ef617e3911a6ac1b13b8d4b2c36036d1139
       id: cache
       with:
         path: /tmp/datacache
-        key: check1232
+        key: check_1
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
