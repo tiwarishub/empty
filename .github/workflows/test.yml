@@ -9,7 +9,7 @@ jobs:
       id: cache
       with:
         path: /tmp/datacache
-        key: echo FOO=foobar--$(date +%s)
+        key: key-${{ github.run_id }}-${{ github.run_attempt }}
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
