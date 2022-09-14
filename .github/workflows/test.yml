@@ -5,7 +5,7 @@ jobs:
   my-example:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@20817ef617e3911a6ac1b13b8d4b2c36036d1139
+    - uses: actions/cache@v3
       id: cache
       with:
         path: /tmp/datacache
