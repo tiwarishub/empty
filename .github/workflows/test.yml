@@ -2,14 +2,14 @@ name: Test Cache download failure
 on:
   workflow_dispatch:
 jobs:
-  java-example:
+  my-example:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/cache@20817ef617e3911a6ac1b13b8d4b2c36036d1139
       id: cache
       with:
         path: /tmp/datacache
-        key: key-${{ github.run_id }}-${{ github.run_attempt }}
+        key: key-test
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
