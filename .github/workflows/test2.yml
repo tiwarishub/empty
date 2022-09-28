@@ -1,18 +1,25 @@
-name: test cache 2
+name: Main
 on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 jobs:
-  my-example:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: [ linux ]
     steps:
-    - uses: actions/cache@v3
-      id: cache
-      with:
-        path: /tmp/datacache
-        key: key-test
-    - if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        rm -rf /tmp/datacache
-        mkdir -p /tmp/datacache
-        for y in {0..1};do openssl rand -out /tmp/datacache/data$y  -base64 $(( 50 * 2**20 * 3/4 )); done 
-        du -sh /tmp/datacache
+      - uses: actions/checkout@v3
+        with:
+           lfs: true
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: name.txt
+          key: ${{ runner.os }}-1
+      - name: Create File
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: echo "Hutson - ${{ github.run_id }}" > name.txt
+      - run: |
+          ls -lAh
+          cat name.txt
