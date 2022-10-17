@@ -10,7 +10,7 @@ jobs:
     - uses: actions/cache@v3
       id: cache
       with:
-        path: .
+        path: /tmp/datacache
         key: ${{ github.event.inputs.key }}
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
