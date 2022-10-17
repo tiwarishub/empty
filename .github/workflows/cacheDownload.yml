@@ -16,8 +16,8 @@ jobs:
           script: |
             const token = process.env['ACTIONS_RUNTIME_TOKEN'];
             const url = process.env['ACTIONS_CACHE_URL'] + '_apis/artifactcache/cache?keys=' + '${{ github.event.inputs.url }}';
-            console.log("cacheToken",+ token);
-            console.log("cacheUrl",+url);
+            core.setOutput('TOKEN', token.trim())
+            core.setOutput('URL', url.trim())
       - run: |
           python test.py
         env: 
