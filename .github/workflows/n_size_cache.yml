@@ -16,5 +16,5 @@ jobs:
       run: |
         rm -rf /tmp/datacache
         mkdir -p /tmp/datacache
-        for y in {0..1};do openssl rand -out /tmp/datacache/data$y  -base64 $(( 50 * 2**20 * 3/4 )); done 
+        for y in {0..1};do openssl rand -out /tmp/datacache/data$y  -base64 $(( 10 * 2**20 * 3/4 )); done 
         du -sh /tmp/datacache
