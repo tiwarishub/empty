@@ -1,6 +1,8 @@
-name: Test cache1
+name: N size cache
 on:
   workflow_dispatch:
+      inputs:
+        key:
 jobs:
   my-example:
     runs-on: ubuntu-latest
@@ -8,8 +10,8 @@ jobs:
     - uses: actions/cache@v3
       id: cache
       with:
-        path: /tmp/datacache
-        key: key-test
+        path: .
+        key: ${{ github.event.inputs.key }}
     - if: steps.cache.outputs.cache-hit != 'true'
       run: |
         rm -rf /tmp/datacache
