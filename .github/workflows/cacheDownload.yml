@@ -1,0 +1,22 @@
+name: Test cache download
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+jobs:
+  download-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        id: script
+        timeout-minutes: 10
+        with:
+          debug: true
+          script: |
+            const token = process.env['ACTIONS_RUNTIME_TOKEN']
+      - run: |
+          python test.py
+        env: 
+          ACTIONS_RUNTIME_TOKEN: ${{ steps.script.outputs.TOKEN }}
+          CACHE_URL: ${{ github.event.inputs.url }}
