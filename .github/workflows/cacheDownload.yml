@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/github-script@v6
         id: script
-        timeout-minutes: 10
+        timeout-minutes: 30
         with:
           debug: true
           script: |
