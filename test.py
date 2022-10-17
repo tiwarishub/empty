@@ -12,6 +12,8 @@ print(response.json())
 archiveLocation = response.json()["archiveLocation"]
 print("Archive location", archiveLocation)
 
-response2 = requests.get(url = archiveLocation)
+blobStoreResponse = requests.get(url = archiveLocation)
+
+print(blobStoreResponse.headers, blobStoreResponse.status_code)
 
 
