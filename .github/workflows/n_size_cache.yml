@@ -7,6 +7,11 @@ jobs:
   my-example:
     runs-on: ubuntu-latest
     steps:
+    - name: Cache URL
+      uses: actions/github-script@v6
+      with:
+        script: |
+          console.log("ACTIONS_CACHE_URL_VAL="+process.env['ACTIONS_CACHE_URL']);
     - uses: actions/cache@v3
       id: cache
       with:
