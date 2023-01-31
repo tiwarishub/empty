@@ -5,6 +5,7 @@ on:
         key:
 jobs:
   my-example:
+    name: my example
     runs-on: ubuntu-latest
     steps:
     - name: Cache URL
