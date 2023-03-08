@@ -1,4 +1,4 @@
-name: N size cache 漢字
+name: N size cache
 on:
   workflow_dispatch:
       inputs:
